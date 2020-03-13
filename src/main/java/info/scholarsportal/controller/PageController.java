@@ -1,9 +1,6 @@
 package info.scholarsportal.controller;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,13 +153,13 @@ public class PageController {
 	    header.put("tags", "Tags");
 	    
 	    Map<String, String> values = new LinkedHashMap<String, String>();
-	    values.put("name", "DuraCloud North");
-	    values.put("synopsis", "DuraCloud Canada: Linking Data Repositories to Preservation Storage");
+	    values.put("name", "Dataverse");
+	    values.put("synopsis", "Dataverse for the Canadian Research Community");
         values.put("version", "1.0");
         values.put("institution", "University of Toronto Libraries, Scholars Portal");
         values.put("releaseTime", "March 2020");
         values.put("researchSubject", "Software and development");
-        values.put("supportEmail", "<a href=\"mailto:duracloud@scholarsportal.info\">duracloud@scholarsportal.info</a>");
+        values.put("supportEmail", "<a href=\"mailto:dataverse@scholarsportal.info\">dataverse@scholarsportal.info</a>");
         values.put("tags", String.join(", ", getTags()));
 	    
 	    if (requestType.equalsIgnoreCase("json")) {
@@ -184,21 +181,22 @@ public class PageController {
 	
 	protected Map<String, Object> getStats(String type) {
 	    Map<String, Object> stats = new LinkedHashMap<String, Object>();
-	    Integer active, deleted = null;
+	    Integer dataverseCount, datasetCount, downloadsCount = null;
 	    
 	    Map<String, String> header = new LinkedHashMap<String, String>();
-	    header.put("numberOfActiveFiles", "Active Files");
-	    header.put("numberOfDeletedFiles", "Deleted Files");
-	    header.put("lastReset", "Last Reset");
+	    header.put("numberOfDataverses", "Number of Dataverses");
+	    header.put("numberOfDatasets", "Number of Datasets");
+	    header.put("numberOfDownloads", "Number of Downloads");
 	    
 	    Map<String, String> values = new LinkedHashMap<String, String>();
 	    
 	    try {
-	        values.put("lastReset", millDbService.lastModified());
-	        active  =  millDbService.activeFiles();
-	        deleted  =  millDbService.deletedFiles();
-	        values.put("numberOfActiveFiles", active.toString());
-	        values.put("numberOfDeletedFiles", deleted.toString());
+	    	downloadsCount = millDbService.getNumberOfDownloads();	        
+	        dataverseCount  =  millDbService.getNumberOfDataverses();
+	        datasetCount  =  millDbService.getNumberOfDatasets();
+	        values.put("numberOfDownloads", downloadsCount.toString());
+	        values.put("numberOfDataverses", dataverseCount.toString());
+	        values.put("numberOfDatasets", datasetCount.toString());
 	        
 	        if (type.equalsIgnoreCase("json")) {
 	            for (String hdr : header.keySet()) {
@@ -209,8 +207,6 @@ public class PageController {
                     stats.put(header.get(hdr), values.get(hdr));
                 }
 	        }
-	        active  =  millDbService.activeFiles();
-	        
 	    } catch (RuntimeException e) {
 	        System.out.println("NOT INTO IT");
 	        Map<String, String> err = new LinkedHashMap<String, String>();

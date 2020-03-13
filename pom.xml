@@ -14,7 +14,6 @@
     <springframework.data.jpa.version>1.6.0.RELEASE</springframework.data.jpa.version>
     <c3po.version>0.9.5.2</c3po.version>
     <tomcat.port>8080</tomcat.port>
-    <mysql.connector.version>8.0.11</mysql.connector.version>
     <hibernate.version>5.4.1.Final</hibernate.version>
   </properties>
 
@@ -78,7 +77,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.9.5</version>
+      <version>2.9.8</version>
     </dependency>
     
     <!-- Hibernate -->
@@ -87,13 +86,14 @@
       <artifactId>hibernate-core</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
-	
-    <!-- MySQL -->
+    
+    <!-- PostgreSQL -->    
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>${mysql.connector.version}</version>
-    </dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.8</version>
+      <scope>runtime</scope>
+    </dependency>    
 
 	<!-- C3PO -->
     <dependency>
@@ -156,7 +156,7 @@
         </configuration>
       </plugin>
 
-      <plugin>
+<!--       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
@@ -174,7 +174,7 @@
               </configuration>
           </execution>
         </executions>
-	  </plugin>
+	  </plugin> -->
     </plugins>
   </build>
 </project>

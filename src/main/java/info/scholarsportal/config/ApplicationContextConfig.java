@@ -24,7 +24,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("info.scholarsportal")
-@PropertySource({ "classpath:persistence-mysql.properties" })
+@PropertySource({ "classpath:persistence-postgresql.properties" })
 public class ApplicationContextConfig implements WebMvcConfigurer  {
     
     @Autowired

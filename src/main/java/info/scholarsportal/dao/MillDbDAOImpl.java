@@ -24,8 +24,8 @@ public class MillDbDAOImpl implements MillDbDAO {
 		this.dataSource = dataSource;
 	}
 
-	public Integer activeFiles() {
-		String sql = "select count(id) as count_id from milldb.manifest_item where deleted = 0";
+	public Integer getNumberOfDataverses() {
+		String sql = "select count(id) as count_id from dvobject where dtype = 'Dataverse'";
 		
 		Connection conn = null;
 		Integer numFiles = 0;
@@ -53,8 +53,8 @@ public class MillDbDAOImpl implements MillDbDAO {
 		return numFiles;
 	}
 
-	public Integer deletedFiles() {
-	  String sql = "select count(id) as count_id from milldb.manifest_item where deleted = 1";
+	public Integer getNumberOfDatasets() {
+	  String sql = "select count(id) as count_id from dvobject where dtype = 'Dataset'";
         
         Connection conn = null;
         Integer numFiles = 0;
@@ -79,18 +79,36 @@ public class MillDbDAOImpl implements MillDbDAO {
                 }
             }
         }
-        System.out.println(numFiles);
         return numFiles;
 	}
 
-	public String lastModified() {
-	    TimeZone tz = TimeZone.getTimeZone("UTC");
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		df.setTimeZone(tz);
-	    //Date lastMod = new Date();
-		String lastMod = df.format(new Date());
-		
-		return lastMod;
+	public Integer getNumberOfDownloads() {
+		  String sql = "select count(*) as count_id from filedownload where downloadtype = 'Download'";
+	        
+	        Connection conn = null;
+	        Integer numFiles = 0;
+	        
+	        try {
+	            conn = dataSource.getConnection();
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ResultSet rs = ps.executeQuery();
+	            if (rs.next()) {
+	                 numFiles = rs.getInt("count_id");
+	            }
+	            rs.close();
+	            ps.close();
+	        } catch (SQLException e) {
+	            throw new RuntimeException(e);
+	        } finally { 
+	            if (conn != null) {
+	                try {
+	                    conn.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        return numFiles;
 	}
 
 }

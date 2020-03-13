@@ -13,16 +13,16 @@ public class MillDbServiceImpl implements MillDbService {
     private MillDbDAO millDb;
     
     @Transactional
-    public Integer activeFiles() {
-        return millDb.activeFiles();
+    public Integer getNumberOfDataverses() {
+        return millDb.getNumberOfDataverses();
     }
 
-    public Integer deletedFiles() {
-        return millDb.deletedFiles();
+    public Integer getNumberOfDatasets() {
+        return millDb.getNumberOfDatasets();
     }
 
-    public String lastModified() {
-        return millDb.lastModified();
+    public Integer getNumberOfDownloads() {
+        return millDb.getNumberOfDownloads();
     }
 
 }
