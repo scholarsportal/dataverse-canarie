@@ -32,23 +32,18 @@ public class PageController {
 	
 	@RequestMapping(value = "doc", 
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showDoc() {
-	    return "doc";
-	}
-	
-	
-	@RequestMapping("doc2")
-	public RedirectView docRedirect() {
+	public RedirectView showDoc() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/duracloud/deployment-docs");
+	    redirectView.setUrl("https://learn.scholarsportal.info/all-guides/dataverse/");
 	    return redirectView;
-	}
-	
+	}	
 	
 	@RequestMapping(value = "factsheet",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showFactSheet() {
-		return "factsheet";
+	public RedirectView showFactSheet() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://dataverse.scholarsportal.info/metrics/?selection=");
+	    return redirectView;
 	}
 	
 	@RequestMapping(value = "info", 
@@ -76,32 +71,42 @@ public class PageController {
 	
 	@RequestMapping(value = "licence",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showLicence() {
-		return "licence";
+	public RedirectView showLicence() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://raw.githubusercontent.com/scholarsportal/dataverse-language-packs/dataverse-v4.19-SP/en_US/termsofuse.properties");
+	    return redirectView;
 	}
 	
 	@RequestMapping(value = "provenance",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showProvenance() {
-		return "provenance";
+	public RedirectView showProvenance() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-v4.19-SP/doc/release-notes/4.19-release-notes.md");
+	    return redirectView;
 	}
 	
 	@RequestMapping(value = "releasenotes",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showReleaseNotes() {
-		return "releasenotes";
+	public RedirectView showReleaseNotes() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-v4.19-SP/doc/release-notes/4.19-release-notes.md");
+	    return redirectView;			
 	}
 	
 	@RequestMapping(value = "source",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showSourceCode() {
-		return "source";
+	public RedirectView showSourceCode() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/tree/dataverse-v4.19-SP");
+	    return redirectView;
 	}
 	
 	@RequestMapping(value = "support",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showSupport() {
-		return "support";
+	public RedirectView showSupport() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://learn.scholarsportal.info/all-guides/dataverse/help/");
+	    return redirectView;	
 	}
 	
 	
@@ -136,8 +141,10 @@ public class PageController {
 
 	@RequestMapping(value = "tryme",
 			method = {RequestMethod.GET, RequestMethod.HEAD})
-	public String showTryMe() {
-		return "tryme";
+	public RedirectView showTryMe() {
+	    RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("https://demodv.scholarsportal.info/");
+	    return redirectView;
 	}
 	
 	protected Map<String,String> getInfo(String requestType) {
@@ -175,7 +182,7 @@ public class PageController {
 	}
 	
 	protected List<String> getTags() {
-	    List<String> tags = Arrays.asList("cloud storage", "preservation storage", "research data preservation");
+	    List<String> tags = Arrays.asList("research data preservation");
 	    return tags;
 	}
 	

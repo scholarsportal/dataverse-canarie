@@ -1,2 +1,2 @@
-<h1>DuraCloud Canada</h1>
-<p><a href="https://duracloud.scholarsportal.info">https://duracloud.scholarsportal.info</a></p>
+<h1>Scholars Portal Dataverse</h1>
+<p><a href="https://dataverse.scholarsportal.info/">https://dataverse.scholarsportal.info/</a></p>

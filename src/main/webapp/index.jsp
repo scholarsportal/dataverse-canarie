@@ -10,7 +10,6 @@
 <div><a href="info">Info</a></div>
 <div><a href="stats">Statistics</a></div>
 <div><a href="doc">Documentation</a></div>
-<div><a href="doc2">Documentation (redirect)</a></div>
 <div><a href="releasenotes">Release Notes</a></div>
 <div><a href="support">Support</a></div>
 <div><a href="source">Source Code</a></div>
