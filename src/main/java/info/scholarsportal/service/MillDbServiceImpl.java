@@ -25,4 +25,9 @@ public class MillDbServiceImpl implements MillDbService {
         return millDb.getNumberOfDownloads();
     }
 
+	@Override
+	public Integer getNumberOfUsers() {
+		 return millDb.getNumberOfUsers();
+	}
+
 }

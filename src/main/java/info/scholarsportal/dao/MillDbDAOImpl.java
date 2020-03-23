@@ -111,4 +111,34 @@ public class MillDbDAOImpl implements MillDbDAO {
 	        return numFiles;
 	}
 
+	@Override
+	public Integer getNumberOfUsers() {
+	String sql = "select count(id) as count_id from authenticateduser";
+		
+		Connection conn = null;
+		Integer ucount = 0;
+		
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				 ucount = rs.getInt("count_id");
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally { 
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return ucount;
+	}
+
 }

@@ -188,12 +188,13 @@ public class PageController {
 	
 	protected Map<String, Object> getStats(String type) {
 	    Map<String, Object> stats = new LinkedHashMap<String, Object>();
-	    Integer dataverseCount, datasetCount, downloadsCount = null;
+	    Integer dataverseCount, datasetCount, downloadsCount, userCount = null;
 	    
 	    Map<String, String> header = new LinkedHashMap<String, String>();
 	    header.put("numberOfDataverses", "Number of Dataverses");
 	    header.put("numberOfDatasets", "Number of Datasets");
 	    header.put("numberOfDownloads", "Number of Downloads");
+	    header.put("numberOfUsers", "Number of Users");
 	    
 	    Map<String, String> values = new LinkedHashMap<String, String>();
 	    
@@ -201,9 +202,11 @@ public class PageController {
 	    	downloadsCount = millDbService.getNumberOfDownloads();	        
 	        dataverseCount  =  millDbService.getNumberOfDataverses();
 	        datasetCount  =  millDbService.getNumberOfDatasets();
+	        userCount = millDbService.getNumberOfUsers();
 	        values.put("numberOfDownloads", downloadsCount.toString());
 	        values.put("numberOfDataverses", dataverseCount.toString());
 	        values.put("numberOfDatasets", datasetCount.toString());
+	        values.put("numberOfUsers", userCount.toString());
 	        
 	        if (type.equalsIgnoreCase("json")) {
 	            for (String hdr : header.keySet()) {
