@@ -81,7 +81,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showProvenance() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-v4.19-SP/doc/release-notes/4.19-release-notes.md");
+	    redirectView.setUrl("https://spotdocs.scholarsportal.info/display/DAT/Provenance");
 	    return redirectView;
 	}
 	
