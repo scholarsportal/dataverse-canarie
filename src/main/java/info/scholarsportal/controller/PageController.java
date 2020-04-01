@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import info.scholarsportal.service.MillDbService;
+import info.scholarsportal.util.PlatformUtil;
 
 @Controller
 public class PageController {
@@ -73,7 +73,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showLicence() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://raw.githubusercontent.com/scholarsportal/dataverse-language-packs/dataverse-v4.19-SP/en_US/termsofuse.properties");
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse-language-packs/blob/dataverse-v4.19-SP/en_US/termsofuse.properties");
 	    return redirectView;
 	}
 	
@@ -143,7 +143,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showTryMe() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://demodv.scholarsportal.info/");
+	    redirectView.setUrl("https://dataverse.scholarsportal.info/");
 	    return redirectView;
 	}
 	
@@ -162,11 +162,11 @@ public class PageController {
 	    Map<String, String> values = new LinkedHashMap<String, String>();
 	    values.put("name", "Dataverse");
 	    values.put("synopsis", "Dataverse for the Canadian Research Community");
-        values.put("version", "1.0");
+        values.put("version", PlatformUtil.getVersion());
         values.put("institution", "University of Toronto Libraries, Scholars Portal");
-        values.put("releaseTime", "March 2020");
+        values.put("releaseTime", PlatformUtil.getReleaseTime());
         values.put("researchSubject", "Software and development");
-        values.put("supportEmail", "<a href=\"mailto:dataverse@scholarsportal.info\">dataverse@scholarsportal.info</a>");
+        values.put("supportEmail", "dataverse@scholarsportal.info");
         values.put("tags", String.join(", ", getTags()));
 	    
 	    if (requestType.equalsIgnoreCase("json")) {
@@ -195,6 +195,7 @@ public class PageController {
 	    header.put("numberOfDatasets", "Number of Datasets");
 	    header.put("numberOfDownloads", "Number of Downloads");
 	    header.put("numberOfUsers", "Number of Users");
+	    header.put("lastReset", "Last Reset");
 	    
 	    Map<String, String> values = new LinkedHashMap<String, String>();
 	    
@@ -207,6 +208,7 @@ public class PageController {
 	        values.put("numberOfDataverses", dataverseCount.toString());
 	        values.put("numberOfDatasets", datasetCount.toString());
 	        values.put("numberOfUsers", userCount.toString());
+	        values.put("lastReset", PlatformUtil.getLastReset());
 	        
 	        if (type.equalsIgnoreCase("json")) {
 	            for (String hdr : header.keySet()) {
@@ -218,7 +220,6 @@ public class PageController {
                 }
 	        }
 	    } catch (RuntimeException e) {
-	        System.out.println("NOT INTO IT");
 	        Map<String, String> err = new LinkedHashMap<String, String>();
 	        err.put("code", "503");
 	        err.put("message", "Service Unavailable");
