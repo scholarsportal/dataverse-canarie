@@ -3,6 +3,8 @@ package info.scholarsportal.util;
 import java.io.IOException;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,12 +15,14 @@ public class PlatformUtil {
 	
 	public static String getReleaseTime() {
 		DateTime dt = new DateTime("2020-04-01T01:01");
-		return dt.toString();
+		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+		return fmt.print(dt);
 	}
 	
 	public static String getLastReset() {
 		DateTime dt = DateTime.now();
-		return dt.toString();
+		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+		return fmt.print(dt);
 	}
 	
 	public static String getVersion() {
