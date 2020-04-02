@@ -3,7 +3,9 @@ package info.scholarsportal.util;
 import java.io.IOException;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +16,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PlatformUtil {
 	
 	public static String getReleaseTime() {
-		DateTime dt = new DateTime("2020-04-01T01:01");
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-		return fmt.print(dt);
+		DateTime dt = new DateTime("2020-04-01");    
+		return convertToISO8601Format(dt.withZone(DateTimeZone.UTC));
 	}
 	
 	public static String getLastReset() {
-		DateTime dt = DateTime.now();
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-		return fmt.print(dt);
+		DateTime dt = DateTime.now().withDayOfMonth(1).withZone(DateTimeZone.UTC);
+		return convertToISO8601Format(dt);
 	}
 	
 	public static String getVersion() {
@@ -42,5 +42,10 @@ public class PlatformUtil {
 			e.printStackTrace();
 		}
 		return "v4.19-SP";
+	}
+	
+	private static String convertToISO8601Format(DateTime dateTime) {
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder().append(ISODateTimeFormat.dateTimeNoMillis()).toFormatter().withOffsetParsed();
+		return formatter.print(dateTime);
 	}
 }
