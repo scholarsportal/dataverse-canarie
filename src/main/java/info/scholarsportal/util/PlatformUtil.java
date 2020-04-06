@@ -14,11 +14,23 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PlatformUtil {
-	public static String release = "";
 	
-	public static String getReleaseTime() {
-		DateTime dt = new DateTime("2019-11-12");    
-		return convertToISO8601Format(dt.withZone(DateTimeZone.UTC));
+	public static String getReleaseTime() {		
+		String releaseDate = "";
+		final String uri = "https://api.github.com/repos/scholarsportal/dataverse/releases/latest";	     
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+	    String body = response.getBody();
+	    ObjectMapper mapper = new ObjectMapper();
+		try {
+			JsonNode root = mapper.readTree(body);
+			JsonNode node = root.path("created_at");
+			releaseDate = node.asText();
+			System.out.println("Release: "+releaseDate);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return releaseDate;
 	}
 	
 	public static String getLastReset() {
@@ -27,7 +39,7 @@ public class PlatformUtil {
 	}
 	
 	public static String getVersion() {
-		String version = "";
+		String apiVersion = "";
 		final String uri = "https://dataverse.scholarsportal.info/api/info/version";	     
 	    RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
@@ -37,13 +49,13 @@ public class PlatformUtil {
 		try {
 			root = mapper.readTree(body);
 			JsonNode data = root.path("data");
-			version = data.get("version").asText();
-			System.out.println("Version: "+version);
-			release = version.substring(0, version.lastIndexOf(".")).concat("-SP");
+			apiVersion = data.get("version").asText();
+			System.out.println("Version: "+apiVersion);
+			return apiVersion.substring(0, apiVersion.lastIndexOf(".")).concat("-SP");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return version;
+		return apiVersion;
 	}
 	
 	private static String convertToISO8601Format(DateTime dateTime) {

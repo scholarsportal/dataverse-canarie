@@ -89,7 +89,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showReleaseNotes() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-"+PlatformUtil.release+"/doc/release-notes/"+PlatformUtil.release.substring(1,PlatformUtil.release.indexOf("-"))+"-release-notes.md");
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-"+PlatformUtil.getVersion()+"/doc/release-notes/"+PlatformUtil.getVersion().substring(1,PlatformUtil.getVersion().indexOf("-"))+"-release-notes.md");
 	    return redirectView;			
 	}
 	
@@ -97,7 +97,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showSourceCode() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/tree/dataverse-"+PlatformUtil.release);
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/tree/dataverse-"+PlatformUtil.getVersion());
 	    return redirectView;
 	}
 	
