@@ -73,7 +73,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showLicence() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse-language-packs/blob/dataverse-v4.19-SP/en_US/termsofuse.properties");
+	    redirectView.setUrl("https://learn.scholarsportal.info/all-guides/dataverse/terms-of-use/");
 	    return redirectView;
 	}
 	
@@ -89,7 +89,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showReleaseNotes() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-v4.19-SP/doc/release-notes/4.19-release-notes.md");
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/blob/dataverse-"+PlatformUtil.release+"/doc/release-notes/"+PlatformUtil.release.substring(1,PlatformUtil.release.indexOf("-"))+"-release-notes.md");
 	    return redirectView;			
 	}
 	
@@ -97,7 +97,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showSourceCode() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/tree/dataverse-v4.19-SP");
+	    redirectView.setUrl("https://github.com/scholarsportal/dataverse/tree/dataverse-"+PlatformUtil.release);
 	    return redirectView;
 	}
 	
@@ -143,7 +143,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showTryMe() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://dataverse.scholarsportal.info/");
+	    redirectView.setUrl("https://demodv.scholarsportal.info/");
 	    return redirectView;
 	}
 	
@@ -182,7 +182,7 @@ public class PageController {
 	}
 	
 	protected List<String> getTags() {
-	    List<String> tags = Arrays.asList("research data preservation");
+	    List<String> tags = Arrays.asList("Research Data Management");
 	    return tags;
 	}
 	

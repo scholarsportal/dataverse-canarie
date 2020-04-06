@@ -14,9 +14,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PlatformUtil {
+	public static String release = "";
 	
 	public static String getReleaseTime() {
-		DateTime dt = new DateTime("2020-04-01");    
+		DateTime dt = new DateTime("2019-11-12");    
 		return convertToISO8601Format(dt.withZone(DateTimeZone.UTC));
 	}
 	
@@ -26,6 +27,7 @@ public class PlatformUtil {
 	}
 	
 	public static String getVersion() {
+		String version = "";
 		final String uri = "https://dataverse.scholarsportal.info/api/info/version";	     
 	    RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
@@ -35,13 +37,13 @@ public class PlatformUtil {
 		try {
 			root = mapper.readTree(body);
 			JsonNode data = root.path("data");
-			JsonNode version = data.get("version");
-			System.out.println("Version: "+version.asText());
-			return version.asText();
+			version = data.get("version").asText();
+			System.out.println("Version: "+version);
+			release = version.substring(0, version.lastIndexOf(".")).concat("-SP");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "v4.19-SP";
+		return version;
 	}
 	
 	private static String convertToISO8601Format(DateTime dateTime) {
