@@ -192,12 +192,14 @@ public class PageController {
 	    
 	    Map<String, String> header = new LinkedHashMap<String, String>();
 	    header.put("numberOfDownloads", "Number of Downloads");
+	    header.put("lastReset", "Last Reset");
 	    
 	    Map<String, String> values = new LinkedHashMap<String, String>();
 	    
 	    try {
-	    	downloadsCount = millDbService.getNumberOfDownloads();
+	    	downloadsCount = millDbService.getNumberOfDownloads();	        
 	        values.put("numberOfDownloads", downloadsCount.toString());
+	        values.put("lastReset", PlatformUtil.getLastReset());
 	        
 	        if (type.equalsIgnoreCase("json")) {
 	            for (String hdr : header.keySet()) {
