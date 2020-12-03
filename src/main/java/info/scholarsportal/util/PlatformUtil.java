@@ -51,7 +51,7 @@ public class PlatformUtil {
 			JsonNode data = root.path("data");
 			apiVersion = data.get("version").asText();
 			System.out.println("Version: "+apiVersion);
-			return apiVersion.substring(0, apiVersion.lastIndexOf(".")).concat("-SP");
+			return apiVersion;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
