@@ -143,7 +143,7 @@ public class PageController {
 			method = {RequestMethod.GET, RequestMethod.HEAD})
 	public RedirectView showTryMe() {
 	    RedirectView redirectView = new RedirectView();
-	    redirectView.setUrl("https://demodv.scholarsportal.info/");
+	    redirectView.setUrl("https://demodv.scholarsportal.info");
 	    return redirectView;
 	}
 	
